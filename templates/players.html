@@ -4,22 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Players</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
         <h1>Hickey's Shed</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="shed.html">Shed</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('games') }}">Games</a></li>
+                <li><a href="{{ url_for('shed') }}">Shed</a></li>
+                <li><a href="{{ url_for('radio') }}">Radio</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <h2>Players</h2>
-        <p>This is the players page.</p>
+        <table>
+            {% for player in players %}
+            <tr>
+                <td>
+                    {% if player.picture %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ player.picture) }}" alt="{{ player.name }}" class="profile-picture">
+                    {% else %}
+                    No picture
+                    {% endif %}
+                </td>
+                <td>
+                    <strong>{{ player.name }}</strong><br>
+                    Wins: {{ player.wins }}<br>
+                    Shedcoins: {{ player.shedcoins }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <footer>
+            <a href="{{ url_for('admin') }}">Admin Page</a>
+        </footer>
     </main>
 </body>
 </html>
