@@ -17,6 +17,5 @@ EXPOSE 5000
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "shed.py"]from flask import Flask, send_from_directory
-from flask_sqlalchemy import SQLAlchemy
+CMD ["python", "shed.py"]
 
