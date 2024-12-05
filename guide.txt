@@ -1,0 +1,25 @@
+# Guide to Running Hickey's Shed Web Application
+
+## Prerequisites
+- Python 3.x
+- Flask
+- Docker (optional, for containerization)
+
+## Setting Up the Virtual Environment
+1. Create a virtual environment:
+   ```sh
+   python3 -m venv venvpip install Flask
+
+source venv/bin/activate
+
+.\venv\Scripts\activate
+
+python shed.py
+
+# Activate the virtual environment
+source venv/bin/activate  # On macOS/Linux
+# or
+.\venv\Scripts\activate  # On Windows
+
+# Run the Flask application
+python shed.py
