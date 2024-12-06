@@ -1,0 +1,48 @@
+this is my shed mega website.
+it will be the connect to my server in the shed 
+this is what it will acomplish
+
+player database of all gamers in the shedstored in a tinydb instance
+as  of right now it needs to keep trakc
+of players, wins, shedcoins and the profile picture
+
+this will all happen on the players and admin page
+
+all player are displayed on the players page 
+the admin page is where new players are added and scoves\
+
+the radio page will my sheds radio station
+this page will stream music from the /static/music folder and player
+it on the radio page, should function as a music app with play pause shuffle
+
+there is a current test function for now
+that downloads a youtube video as a mp3 and stores it in the music folder
+where my program can play and shulle though music
+
+next we will build the games pages
+
+first will be another tinydb for the shed games libery
+
+will need some way to add games to the shed in bulk i want to add some sort of gpt insant to bulk add games with in my dayabase peraminers
+
+this is how i want my games database to be arranged for now may chnage
+
+
+
+
+videogame database = gamename, realease, playerscount, consoles, location, 
+
+playerscount is the number of players that can play at a time on 1 tv with my set upper
+reaslease is the year the game came out
+console is what game you can play it on this can be a mutiple for example it could be switch and an xbox or all xbox1 ps4 and ps4
+location is where the game is located in my collection this will be a sentence
+
+will also need a page where i can work on the database add games edit parts and view
+maybe 
+videogamedb
+
+i lastly want some way to integrade openai gpt3 to bulk add games with the prefix of my database for example
+add all the ds pokemon games to the db 
+and it return the sql or tiny logic to add the games to the database
+
+and there will also be a page to view and search the games by its varoius differnt entites

@@ -5,42 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Players</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        header, main {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+        ul.players-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        ul.players-list li {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            width: 200px;
+        }
+        ul.players-list li img {
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .admin-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Hickey's Shed</h1>
+        <h1>Players</h1>
         <nav>
             <ul>
                 <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('games') }}">Games</a></li>
                 <li><a href="{{ url_for('shed') }}">Shed</a></li>
-                <li><a href="{{ url_for('radio') }}">Radio</a></li>
+                <li><a href="{{ url_for('players.players') }}">Players</a></li>
+                <li><a href="{{ url_for('radio.radio') }}">Radio</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h2>Players</h2>
-        <table>
+        <h2>Player List</h2>
+        <ul class="players-list">
             {% for player in players %}
-            <tr>
-                <td>
-                    {% if player.picture %}
-                    <img src="{{ url_for('static', filename='uploads/' ~ player.picture) }}" alt="{{ player.name }}" class="profile-picture">
-                    {% else %}
-                    No picture
-                    {% endif %}
-                </td>
-                <td>
-                    <strong>{{ player.name }}</strong><br>
-                    Wins: {{ player.wins }}<br>
-                    Shedcoins: {{ player.shedcoins }}
-                </td>
-            </tr>
+            <li>
+                <img src="{{ url_for('static', filename='uploads/' ~ player.picture) }}" alt="{{ player.name }}" width="100" height="100">
+                <p>{{ player.name }}</p>
+                <p>Wins: {{ player.wins }}</p>
+                <p>Shedcoins: {{ player.shedcoins }}</p>
+            </li>
             {% endfor %}
-        </table>
-        <footer>
-            <a href="{{ url_for('admin') }}">Admin Page</a>
-        </footer>
+        </ul>
+        <div class="admin-link">
+            <a href="{{ url_for('players.admin') }}">Go to Admin Page</a>
+        </div>
     </main>
 </body>
 </html>

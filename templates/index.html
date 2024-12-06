@@ -11,16 +11,16 @@
         <h1>Hickey's Shed</h1>
         <nav>
             <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('games') }}">Games</a></li>
                 <li><a href="{{ url_for('shed') }}">Shed</a></li>
-                <li><a href="{{ url_for('players') }}">Players</a></li>
-                <li><a href="{{ url_for('radio') }}">Radio</a></li>
+                <li><a href="{{ url_for('players.players') }}">Players</a></li>
+                <li><a href="{{ url_for('radio.radio') }}">Radio</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h2>Welcome to Hickey's Shed</h2>
-        <p>This is the landing page.</p>
+        <a href="{{ url_for('radio.radio') }}">Go to Radio</a>
     </main>
 </body>
 </html>
