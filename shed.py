@@ -10,6 +10,8 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max file size
 db = TinyDB('shed.json')
 Player = Query()
 
+app.config['UPLOAD_FOLDER'] = 'static/music'
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -34,7 +36,22 @@ def admin():
 
 @app.route('/radio')
 def radio():
-    return render_template('radio.html')
+    songs = os.listdir(app.config['UPLOAD_FOLDER'])
+    return render_template('radio.html', songs=songs)
+
+@app.route('/add_song', methods=['POST'])
+def add_song():
+    url = request.form['url']
+    try:
+        yt = YouTube(url)
+        audio_stream = yt.streams.filter(only_audio=True).first()
+        output_file = audio_stream.download(output_path=app.config['UPLOAD_FOLDER'])
+        base, ext = os.path.splitext(output_file)
+        new_file = base + '.mp3'
+        os.rename(output_file, new_file)
+        return jsonify({'message': 'Song downloaded successfully!'})
+    except Exception as e:
+        return jsonify({'message': str(e)})
 
 @app.route('/add_player', methods=['POST'])
 def add_player():
