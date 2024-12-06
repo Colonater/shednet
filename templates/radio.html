@@ -8,20 +8,96 @@
 </head>
 <body>
     <header>
-        <h1>Hickey's Shed</h1>
+        <h1>Hickey's Shed Radio</h1>
         <nav>
             <ul>
                 <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('games') }}">Games</a></li>
                 <li><a href="{{ url_for('shed') }}">Shed</a></li>
                 <li><a href="{{ url_for('players') }}">Players</a></li>
-                <li><a href="{{ url_for('radio') }}">Radio</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h2>Radio</h2>
-        <p>This is the radio page.</p>
+        <h2>Music Player</h2>
+        <div id="player">
+            <audio id="audio" controls>
+                <source id="audioSource" src="" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+            <div id="trackInfo">
+                <img id="albumArt" src="" alt="Album Art" width="100">
+                <div id="trackDetails">
+                    <p id="trackTitle">No track playing</p>
+                </div>
+            </div>
+            <button onclick="prevTrack()">Previous</button>
+            <button onclick="playPause()">Play/Pause</button>
+            <button onclick="nextTrack()">Next</button>
+        </div>
+        <h2>Add a Song</h2>
+        <form id="addSongForm" action="{{ url_for('add_song') }}" method="post">
+            <label for="url">YouTube URL:</label>
+            <input type="text" id="url" name="url" required><br>
+            <button type="submit">Add Song</button>
+        </form>
+        <p id="message"></p>
     </main>
+    <script>
+        let currentTrackIndex = 0;
+        const songs = {{ songs|tojson }};
+        const audio = document.getElementById('audio');
+        const audioSource = document.getElementById('audioSource');
+        const trackTitle = document.getElementById('trackTitle');
+        const albumArt = document.getElementById('albumArt');
+        const message = document.getElementById('message');
+
+        function loadTrack(index) {
+            if (songs.length > 0) {
+                const track = songs[index];
+                audioSource.src = `{{ url_for('static', filename='music/') }}${track}`;
+                trackTitle.textContent = track;
+                albumArt.src = `{{ url_for('static', filename='album_art/default.jpg') }}`; // Default album art
+                audio.load();
+            }
+        }
+
+        function playPause() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % songs.length;
+            loadTrack(currentTrackIndex);
+            audio.play();
+        }
+
+        function prevTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + songs.length) % songs.length;
+            loadTrack(currentTrackIndex);
+            audio.play();
+        }
+
+        document.getElementById('addSongForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const response = await fetch('{{ url_for('add_song') }}', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            message.textContent = result.message;
+            if (result.message === 'Song downloaded successfully!') {
+                songs.push(formData.get('url').split('=')[1] + '.mp3'); // Assuming the filename is the video ID
+                loadTrack(songs.length - 1);
+            }
+        });
+
+        loadTrack(currentTrackIndex);
+    </script>
 </body>
 </html>
