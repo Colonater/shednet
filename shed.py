@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from players import players_bp
 from radio import radio_bp
+from games import games_bp
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -9,6 +10,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max file size
 # Register blueprints
 app.register_blueprint(players_bp)
 app.register_blueprint(radio_bp)
+app.register_blueprint(games_bp)
 
 @app.route('/')
 def home():

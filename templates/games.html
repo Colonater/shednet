@@ -4,22 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        header, main {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+        ul.games-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        ul.games-list li {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+        }
+        .game-details {
+            display: none;
+            margin-top: 10px;
+            text-align: left;
+        }
+        .manage-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function toggleDetails(id) {
+            var details = document.getElementById('details-' + id);
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
-        <h1>Hickey's Shed</h1>
+        <h1>Games</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shed.html">Shed</a></li>
-                <li><a href="players.html">Players</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('games.games') }}">Games</a></li>
+                <li><a href="{{ url_for('shed') }}">Shed</a></li>
+                <li><a href="{{ url_for('players.players') }}">Players</a></li>
+                <li><a href="{{ url_for('radio.radio') }}">Radio</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h2>Games</h2>
-        <p>This is the games page.</p>
+        <h2>Game List</h2>
+        <ul class="games-list">
+            {% for game in games %}
+            <li onclick="toggleDetails({{ game.id }})">
+                {{ game.gamename }}
+                <div id="details-{{ game.id }}" class="game-details">
+                    <p>Release Year: {{ game.release_year }}</p>
+                    <p>Players Count: {{ game.playerscount }}</p>
+                    <p>Consoles: {{ game.consoles }}</p>
+                    <p>Location: {{ game.location }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="manage-link">
+            <a href="{{ url_for('games.manage_games') }}">Manage Games</a>
+        </div>
     </main>
 </body>
 </html>

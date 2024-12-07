@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Games</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Manage Games</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('games.games') }}">Games</a></li>
+                <li><a href="{{ url_for('shed') }}">Shed</a></li>
+                <li><a href="{{ url_for('players.players') }}">Players</a></li>
+                <li><a href="{{ url_for('radio.radio') }}">Radio</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Add Game</h2>
+        <form action="{{ url_for('games.add_game') }}" method="post">
+            <label for="gamename">Game Name:</label>
+            <input type="text" id="gamename" name="gamename" required>
+            <label for="release_year">Release Year:</label>
+            <input type="number" id="release_year" name="release_year" required>
+            <label for="playerscount">Players Count:</label>
+            <input type="number" id="playerscount" name="playerscount" required>
+            <label for="consoles">Consoles (comma-separated):</label>
+            <input type="text" id="consoles" name="consoles" required>
+            <label for="location">Location (comma-separated):</label>
+            <input type="text" id="location" name="location" required>
+            <button type="submit">Add Game</button>
+        </form>
+        <h2>Existing Games</h2>
+        <ul>
+            {% for game in games %}
+            <li>
+                {{ game.gamename }}
+                <form action="{{ url_for('games.edit_game', game_id=game.id) }}" method="post">
+                    <label for="gamename">Game Name:</label>
+                    <input type="text" id="gamename" name="gamename" value="{{ game.gamename }}" required>
+                    <label for="release_year">Release Year:</label>
+                    <input type="number" id="release_year" name="release_year" value="{{ game.release_year }}" required>
+                    <label for="playerscount">Players Count:</label>
+                    <input type="number" id="playerscount" name="playerscount" value="{{ game.playerscount }}" required>
+                    <label for="consoles">Consoles (comma-separated):</label>
+                    <input type="text" id="consoles" name="consoles" value="{{ game.consoles }}" required>
+                    <label for="location">Location (comma-separated):</label>
+                    <input type="text" id="location" name="location" value="{{ game.location }}" required>
+                    <button type="submit">Edit Game</button>
+                </form>
+                <form action="{{ url_for('games.delete_game', game_id=game.id) }}" method="post">
+                    <button type="submit">Delete Game</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
