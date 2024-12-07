@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ game.gamename }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        header, main {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+        .game-details {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ game.gamename }}</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('games.games') }}">Games</a></li>
+                <li><a href="{{ url_for('shed') }}">Shed</a></li>
+                <li><a href="{{ url_for('players.players') }}">Players</a></li>
+                <li><a href="{{ url_for('radio.radio') }}">Radio</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="game-details">
+            <h2>{{ game.gamename }}</h2>
+            <p>Release Year: {{ game.release_year }}</p>
+            <p>Players Count: {{ game.playerscount }}</p>
+            <p>Consoles: {{ game.consoles }}</p>
+            <p>Location: {{ game.location }}</p>
+        </div>
+        <div class="manage-link">
+            <a href="{{ url_for('games.manage_games') }}">Manage Games</a>
+        </div>
+    </main>
+</body>
+</html>
