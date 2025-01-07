@@ -6,6 +6,7 @@
     <title>Games</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
+        /* Existing styles */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -20,19 +21,36 @@
             max-width: 800px;
             margin: 20px auto;
         }
-        nav ul {
+        
+        /* Add new favorites styles */
+        .favorites-list {
             list-style: none;
             padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .favorite-item {
             display: flex;
-            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
         }
-        nav ul li {
-            margin: 0 10px;
+        .favorite-item img {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
         }
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
+        .favorite-details {
+            flex: 1;
         }
+        
+        /* Existing styles continued */
         ul.games-list {
             list-style: none;
             padding: 0;
@@ -40,25 +58,9 @@
             flex-direction: column;
             align-items: center;
         }
-        ul.games-list li {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
-            text-align: center;
-            cursor: pointer;
-        }
-        .game-details {
-            display: none;
-            margin-top: 10px;
-            text-align: left;
-        }
-        .manage-link {
-            margin-top: 20px;
-            text-align: center;
-        }
+        /* ... rest of your existing styles ... */
     </style>
+    <!-- Keep existing script -->
     <script>
         function toggleDetails(id) {
             var details = document.getElementById('details-' + id);
@@ -84,7 +86,48 @@
         </nav>
     </header>
     <main>
+        <h2>Shed Favorites</h2>
+        <ul class="favorites-list">
+            <li class="favorite-item">
+                <img src="{{ url_for('static', filename='boxart/bo2.jpg') }}" alt="Call of Duty Black Ops 2">
+                <div class="favorite-details">
+                    <h3>Call of Duty Black Ops 2</h3>
+                </div>
+            </li>
+            <li class="favorite-item">
+                <img src="{{ url_for('static', filename='boxart/uch.jpg') }}" alt="Ultimate Chicken Horse">
+                <div class="favorite-details">
+                    <h3>Ultimate Chicken Horse</h3>
+                </div>
+            </li>
+            <li class="favorite-item">
+                <img src="{{ url_for('static', filename='boxart/marioparty7.jpg') }}" alt="Mario Party 7">
+                <div class="favorite-details">
+                    <h3>Mario Party 7</h3>
+                </div>
+            </li>
+            <li class="favorite-item">
+                <img src="{{ url_for('static', filename='boxart/nhl12.jpg') }}" alt="NHL 12">
+                <div class="favorite-details">
+                    <h3>NHL 12</h3>
+                </div>
+            </li>
+            <li class="favorite-item">
+                <img src="{{ url_for('static', filename='boxart/clonehero.jpeg') }}" alt="Clone Hero">
+                <div class="favorite-details">
+                    <h3>Clone Hero</h3>
+                </div>
+            </li>
+            <li class="favorite-item">
+                <img src="{{ url_for('static', filename='boxart/smashbros.jpg') }}" alt="Super Smash Bros Ultimate">
+                <div class="favorite-details">
+                    <h3>Super Smash Bros Ultimate</h3>
+                </div>
+            </li>
+        </ul>
+
         <h2>Game List</h2>
+        <!-- Keep existing game list -->
         <ul class="games-list">
             {% for game in games %}
             <li onclick="toggleDetails({{ game.id }})">
@@ -100,6 +143,7 @@
         </ul>
         <div class="manage-link">
             <a href="{{ url_for('games.manage_games') }}">Manage Games</a>
+            <a href="{{ url_for('library.library') }}" class="btn btn-primary">Go to Library</a>
         </div>
     </main>
 </body>

@@ -5,6 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hickey's Shed</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        main {
+            background-color: transparent !important;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: rgba(51, 51, 51, 0.85);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .favorites-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .favorite-item {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .favorite-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .favorite-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .favorite-details h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        .welcome-text {
+            color: white;
+            text-align: center;
+            line-height: 1.6;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .welcome-text span {
+            color: #9370DB;
+            font-weight: bold;
+        }
+
+        .discord-button {
+            width: 60px;
+            height: 60px;
+            background-color: #7289DA;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto 0;
+            transition: transform 0.3s;
+        }
+
+        .discord-button:hover {
+            transform: scale(1.1);
+        }
+
+        .discord-icon {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,8 +111,106 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <a href="{{ url_for('radio.radio') }}">Go to Radio</a>
+        <div class="container">
+            <p class="welcome-text">
+                Welcome to <span>Hickey's Virtual Shed</span>,<br>
+                Cole's Personal Collection of<br>
+                <span>Video Games n' Consoles</span>,<br>
+                <span>Music</span>, <span>Database</span><br>
+                and our <span>Playerbase</span>.
+            </p>
+            <a href="https://discord.gg/3kr45Ccxnv" target="_blank" class="discord-button">
+                <svg class="discord-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="container">
+            <h2>Consoles</h2>
+            <ul class="favorites-list">
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='consoles/wii.jpg') }}" alt="Nintendo Wii">
+                    <div class="favorite-details">
+                        <h3>Nintendo Wii</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='consoles/xbox360.jpg') }}" alt="Xbox 360">
+                    <div class="favorite-details">
+                        <h3>Xbox 360</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='consoles/n64.jpg') }}" alt="Nintendo 64">
+                    <div class="favorite-details">
+                        <h3>Nintendo 64</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='consoles/ds.jpg') }}" alt="Nintendo DS">
+                    <div class="favorite-details">
+                        <h3>Nintendo DS</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='consoles/gamecube.jpg') }}" alt="Nintendo GameCube">
+                    <div class="favorite-details">
+                        <h3>Nintendo GameCube</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='consoles/pc.jpg') }}" alt="Gaming PC">
+                    <div class="favorite-details">
+                        <h3>Gaming PC</h3>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <h2>Favorite Games</h2>
+            <ul class="favorites-list">
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='boxart/bo2.jpg') }}" alt="Call of Duty Black Ops 2">
+                    <div class="favorite-details">
+                        <h3>Call of Duty Black Ops 2</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='boxart/uch.jpg') }}" alt="Ultimate Chicken Horse">
+                    <div class="favorite-details">
+                        <h3>Ultimate Chicken Horse</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='boxart/marioparty7.jpg') }}" alt="Mario Party 7">
+                    <div class="favorite-details">
+                        <h3>Mario Party 7</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='boxart/nhl12.jpg') }}" alt="NHL 12">
+                    <div class="favorite-details">
+                        <h3>NHL 12</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='boxart/clonehero.jpeg') }}" alt="Clone Hero">
+                    <div class="favorite-details">
+                        <h3>Clone Hero</h3>
+                    </div>
+                </li>
+                <li class="favorite-item">
+                    <img src="{{ url_for('static', filename='boxart/smashbros.jpg') }}" alt="Super Smash Bros Ultimate">
+                    <div class="favorite-details">
+                        <h3>Super Smash Bros Ultimate</h3>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </main>
 </body>
 </html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .console, .game {
+            cursor: pointer;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hickey's Shed Library</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('games') }}">Games</a></li>
+                <li><a href="{{ url_for('shed') }}">Shed</a></li>
+                <li><a href="{{ url_for('players.players') }}">Players</a></li>
+                <li><a href="{{ url_for('radio.radio') }}">Radio</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Library</h2>
+        <ul>
+            {% for console in consoles %}
+                <li class="console" onclick="window.location.href='{{ url_for('library.library', console=console) }}'">{{ console }}</li>
+            {% endfor %}
+        </ul>
+
+        {% if selected_console %}
+            <h2>{{ selected_console }} Games</h2>
+            <ul>
+                {% for game in games %}
+                    <li class="game"><a href="{{ url_for('library.download_game', console=selected_console, game=game) }}">{{ game }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </main>
+    <footer>
+        <a href="{{ url_for('radio.radio') }}">Go to Radio</a>
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </footer>
+</body>
+</html>

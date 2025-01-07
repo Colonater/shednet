@@ -46,3 +46,20 @@ add all the ds pokemon games to the db
 and it return the sql or tiny logic to add the games to the database
 
 and there will also be a page to view and search the games by its varoius differnt entites
+
+
+
+ok the games page on the bottom i want you to add a button to the take you to the new library page
+ that you will also complete. om this library page the purpose of this library page will act as a download page 
+ for games i have created on my server for now i will create a library directoy in the docker to practise and test. 
+ but it will be connected to my game library linux server. but test ready for now. this page must be setup to download
+  these games. the page will list all the different consoles that i have and clicking on the console 
+  will revel all the games i have for that console. clicked the game will start to download the game. 
+  i need some help with seting up the downloading process hopefully you can figure out how to do it right. 
+  this library should be able to hold over 6 tb of games with games being as large as 50 gb. 
+  so there will have to be a way to zip the file on the server before it is send to the user. 
+  so for now i wants a library page this will display all the consoles and when you click a 
+  given conole it will list the gave available and when the game is click it will start the download. 
+  so for this we will need a mock dirertoy in the docker for now to test the download 
+  and games function making sure any game i add to this library directory will show up on the library
+   and be able to be downloaded. 
