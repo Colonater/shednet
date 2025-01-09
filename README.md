@@ -25,6 +25,7 @@ Website includes
 
     Shed weather station
         to send weather updates from the shed to discord and my phone with higher accuracy then eddie sheer
+        using sharon snow ai to predict the weater
 
     qbittorent webui
 
@@ -36,5 +37,5 @@ flask for displaying the data on a webpage
 positioned in a docker container that will in thoery work
 on all mac os windows and ubuntu, being developed now on macos and send to run in the cloud or shed server
 
-
+make sure to install the requirments.txt
 docker run -p 5045:5045 shedapp
