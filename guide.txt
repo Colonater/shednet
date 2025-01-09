@@ -24,3 +24,74 @@ source venv/bin/activate  # On macOS/Linux
 
 # Run the Flask application
 python shed.py
+
+
+# Hickey's Shed - Docker Guide
+
+## Project Structure
+/app
+  ├── data/              # TinyDB databases
+  ├── static/
+  │   ├── music/        # Music files for radio
+  │   ├── boxart/       # Game boxart images
+  │   ├── consoles/     # Console images
+  │   ├── uploads/      # Player profile pictures
+  │   └── library/      # Game library files
+  ├── templates/         # HTML templates
+  ├── shed.py           # Main application
+  └── requirements.txt   # Python dependencies
+
+## Dependencies
+- Python 3.9
+- Flask
+- TinyDB
+- pydub (requires ffmpeg)
+- Other requirements in requirements.txt
+
+## Data Persistence
+The following directories are persisted via Docker volumes:
+- /app/data: TinyDB databases
+- /app/static/*: All media files
+
+## Building & Running
+1. Build the container:
+   ```bash
+   docker-compose build
+
+
+# Build
+docker build -t shedapp .
+
+docker stop $(docker ps -q)
+docker rm $(docker ps -a -q)
+docker rmi shedapp
+docker build -t shedapp .
+docker run -p 5045:5045 shedapp
+
+
+
+# Start development server (auto-reload)
+docker-compose -f docker-compose.dev.yml up --build
+
+# Stop development server
+docker-compose -f docker-compose.dev.yml down
+
+# View logs
+docker-compose -f docker-compose.dev.yml logs -f
+
+# Create feature branch
+git checkout -b feature/new-feature
+
+# Make changes & test
+docker-compose -f docker-compose.dev.yml up --build
+
+# Commit changes
+git add .
+git commit -m "Add new feature"
+git push origin feature/new-feature
+
+# Merge to main
+git checkout main
+git pull
+git merge feature/new-feature
+git push

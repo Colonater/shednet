@@ -6,68 +6,24 @@
     <title>Hickey's Shed</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
+        /* Keep all your existing CSS */
         main {
             background-color: transparent !important;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
         }
-
-        .container {
+        
+        .welcome-container {
             background-color: rgba(51, 51, 51, 0.85);
             border-radius: 15px;
             padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        .favorites-list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 0;
-            list-style: none;
-        }
-
-        .favorite-item {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 10px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            transition: transform 0.2s;
-        }
-
-        .favorite-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .favorite-item img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-right: 15px;
-        }
-
-        .favorite-details h3 {
-            margin: 0;
-            color: #333;
-            font-size: 1.1em;
-        }
-
-        h2 {
-            color: white;
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.8em;
+            margin: 20px auto;
+            max-width: 800px;
         }
 
         .welcome-text {
             color: white;
             text-align: center;
-            line-height: 1.6;
             font-size: 1.2em;
-            margin-bottom: 20px;
+            line-height: 1.6;
         }
 
         .welcome-text span {
@@ -76,8 +32,8 @@
         }
 
         .discord-button {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background-color: #7289DA;
             border-radius: 50%;
             display: flex;
@@ -92,9 +48,53 @@
         }
 
         .discord-icon {
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             fill: white;
+        }
+
+        /* Add this for the two columns */
+        .columns {
+            display: flex;
+            gap: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .column {
+            background-color: rgba(51, 51, 51, 0.85);
+            border-radius: 15px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .list-item {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .list-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .columns {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -113,7 +113,8 @@
     </header>
 
     <main>
-        <div class="container">
+        <!-- Keep welcome section -->
+        <div class="welcome-container">
             <p class="welcome-text">
                 Welcome to <span>Hickey's Virtual Shed</span>,<br>
                 Cole's Personal Collection of<br>
@@ -128,88 +129,63 @@
             </a>
         </div>
 
-        <div class="container">
-            <h2>Consoles</h2>
-            <ul class="favorites-list">
-                <li class="favorite-item">
+        <!-- Add two columns -->
+        <div class="columns">
+            <div class="column">
+                <h2>Consoles</h2>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='consoles/wii.jpg') }}" alt="Nintendo Wii">
-                    <div class="favorite-details">
-                        <h3>Nintendo Wii</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>Nintendo Wii</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='consoles/xbox360.jpg') }}" alt="Xbox 360">
-                    <div class="favorite-details">
-                        <h3>Xbox 360</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>Xbox 360</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='consoles/n64.jpg') }}" alt="Nintendo 64">
-                    <div class="favorite-details">
-                        <h3>Nintendo 64</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>Nintendo 64</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='consoles/ds.jpg') }}" alt="Nintendo DS">
-                    <div class="favorite-details">
-                        <h3>Nintendo DS</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>Nintendo DS</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='consoles/gamecube.jpg') }}" alt="Nintendo GameCube">
-                    <div class="favorite-details">
-                        <h3>Nintendo GameCube</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>Nintendo GameCube</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='consoles/pc.jpg') }}" alt="Gaming PC">
-                    <div class="favorite-details">
-                        <h3>Gaming PC</h3>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="container">
-            <h2>Favorite Games</h2>
-            <ul class="favorites-list">
-                <li class="favorite-item">
+                    <h3>Gaming PC</h3>
+                </div>
+            </div>
+            
+            <div class="column">
+                <h2>Favorite Games</h2>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='boxart/bo2.jpg') }}" alt="Call of Duty Black Ops 2">
-                    <div class="favorite-details">
-                        <h3>Call of Duty Black Ops 2</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>Call of Duty Black Ops 2</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='boxart/uch.jpg') }}" alt="Ultimate Chicken Horse">
-                    <div class="favorite-details">
-                        <h3>Ultimate Chicken Horse</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>Ultimate Chicken Horse</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='boxart/marioparty7.jpg') }}" alt="Mario Party 7">
-                    <div class="favorite-details">
-                        <h3>Mario Party 7</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>Mario Party 7</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='boxart/nhl12.jpg') }}" alt="NHL 12">
-                    <div class="favorite-details">
-                        <h3>NHL 12</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>NHL 12</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='boxart/clonehero.jpeg') }}" alt="Clone Hero">
-                    <div class="favorite-details">
-                        <h3>Clone Hero</h3>
-                    </div>
-                </li>
-                <li class="favorite-item">
+                    <h3>Clone Hero</h3>
+                </div>
+                <div class="list-item">
                     <img src="{{ url_for('static', filename='boxart/smashbros.jpg') }}" alt="Super Smash Bros Ultimate">
-                    <div class="favorite-details">
-                        <h3>Super Smash Bros Ultimate</h3>
-                    </div>
-                </li>
-            </ul>
+                    <h3>Super Smash Bros Ultimate</h3>
+                </div>
+            </div>
         </div>
     </main>
 </body>

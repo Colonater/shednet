@@ -1,21 +1,39 @@
-# Use the official Python image from the Docker Hub
+# Base image
 FROM python:3.9-slim
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Install system dependencies (ffmpeg for audio processing)
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install any needed packages specified in requirements.txt
+# Create necessary directories
+RUN mkdir -p /app/static/music \
+    /app/static/boxart \
+    /app/static/consoles \
+    /app/static/uploads \
+    /app/static/library \
+    /app/data
+
+
+# Development or Production
+ARG ENVIRONMENT=production
+ENV FLASK_ENV=${ENVIRONMENT}
+
+# Copy requirements first for caching
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 5000 available to the world outside this container
-EXPOSE 5000
+# Copy application code
+COPY . .
 
-# Define environment variable
-ENV NAME World
+# Environment variables
+ENV FLASK_APP=shed.py
+ENV FLASK_ENV=production
+ENV PORT=5045
 
-# Run app.py when the container launches
+
+# Run the application
 CMD ["python", "shed.py"]
-

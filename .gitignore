@@ -1,0 +1,20 @@
+
+4. Create a basic .gitignore:
+
+```gitignore
+# Virtual environment
+venv/
+__pycache__/
+*.pyc
+.git/
+.env
+*.md
+
+# Keep .gitkeep files
+!static/*/. gitkeep
+
+# Environment variables
+.env
+
+
+
